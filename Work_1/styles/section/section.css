@@ -23,7 +23,7 @@
 
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   gap: 2.5rem;
 }
 
@@ -35,13 +35,13 @@
   flex-direction: column;
 }
 
-.table__cell__heading {
+.table__heading {
   font-size: 1.5rem;
   line-height: 1.15;
   font-weight: 600;
 }
 
-.table__cell__text {
+.table__text {
   padding-top: 1.25rem;
   font-size: 1.125rem;
   line-height: 1.2;
