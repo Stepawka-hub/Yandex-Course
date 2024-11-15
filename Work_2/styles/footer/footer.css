@@ -50,6 +50,7 @@
   line-height: 2rem;
   color: #fff;
   text-decoration: none;
+  transition: opacity 0.25s linear;
 }
 
 .footer__column-link:hover {

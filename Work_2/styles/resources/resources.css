@@ -1,0 +1,32 @@
+.resources {
+  padding: 0 0 13.5rem;
+}
+
+.resources__logo-zone {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.resources__link {
+  transition: opacity 0.25s ease-in;
+}
+
+.resources__link:hover {
+  opacity: 0.8;
+}
+
+.resources__link:active {
+  opacity: 0.6;
+}
+
+.resources__logo {
+  width: 270px;
+  height: 38px;
+  text-align: center;
+}

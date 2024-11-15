@@ -1,0 +1,21 @@
+.video {
+  padding: 6.25rem 0 0;
+}
+
+.video .section-subtitle {
+  margin: 0 auto;
+}
+
+.video__iframes {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem; 
+  border: none;
+}
+
+.video__iframe {
+  position: relative;
+  top: 3.125rem;
+}

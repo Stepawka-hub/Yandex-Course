@@ -1,0 +1,18 @@
+.kaufman {
+  position: relative;
+  background-color: #1f1f1f;
+  padding: 5.625rem 0;
+  overflow: hidden;
+}
+
+.kaufman .table__cell {
+  width: 17.5%;
+  padding: 5rem 0 0;
+}
+
+.kaufman__triangle {
+  position: absolute;
+  top: 0;
+  right: -13rem;
+  z-index: 0;
+}

@@ -1,0 +1,40 @@
+.description {
+  display: flex;
+  justify-content: center;
+}
+
+.two-columns {
+  width: 80%;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 6.25rem;
+}
+
+.two-columns__main-text {
+  width: 80%;
+  min-width: 49rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.two-columns__brief {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #2f80ed;
+}
+
+.two-columns__paragraph {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.two-columns__span-accent {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
