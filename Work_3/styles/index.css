@@ -9,6 +9,7 @@
 
 .page {
   font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-color-primary);
 }
 
 
