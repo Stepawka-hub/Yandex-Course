@@ -1,0 +1,15 @@
+@import url('../vendor/normalize.css');
+@import url('../styles/variables.css');
+@import url('./header/header.css');
+@import url('./footer/footer.css');
+
+.body {
+  background-color: var(--page-background-color);
+}
+
+.page {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+
+
