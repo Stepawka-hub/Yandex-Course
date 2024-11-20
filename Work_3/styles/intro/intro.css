@@ -1,0 +1,38 @@
+.intro {
+  max-width: 61.625rem;
+  margin: 5.75rem 0;
+  padding: 0 9.25rem;
+}
+
+.intro__title {
+  margin: 0 0 2.5rem;
+  font-size: 3.375rem;
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+.intro__text {
+  margin: 0 0 2rem;
+  font-weight: 300;
+  line-height: 1.63;
+}
+
+.intro__list {
+  list-style-type: none;
+}
+
+.intro__list-item {
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 1.125rem;
+}
+
+.intro__list-text {
+  font-weight: bold;
+}
+
+@media (min-width: 1440px) {
+  .intro {
+    margin: 5.75rem auto;
+  }
+}

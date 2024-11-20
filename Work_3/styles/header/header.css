@@ -1,0 +1,23 @@
+.header {
+  padding: 0 3rem;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0 3.5rem;
+}
+
+.header__links {
+  display: flex;
+  gap: 1.125rem;
+}
+
+.header__link {
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.link_active {
+  text-decoration: underline;
+}

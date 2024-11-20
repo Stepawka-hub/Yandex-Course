@@ -1,0 +1,21 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0 3rem 1.5rem;
+}
+
+.footer__nav {
+  display: flex;
+  gap: 1.125rem;
+}
+
+.footer__link {
+  line-height: 1.125rem;
+  text-decoration: none;
+}
+
+.footer__copyright {
+  font-size: 0.875rem;
+  line-height: 1rem;
+}

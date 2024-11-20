@@ -1,16 +1,14 @@
 @import url('../vendor/normalize.css');
 @import url('../styles/variables.css');
+@import url('./fonts.css');
+
+@import url('./general/general.css');
 @import url('./header/header.css');
+@import url('./lead/lead.css');
+@import url('./intro/intro.css');
+@import url('./photo-grid/photo-grid.css');
+@import url('./places/places.css');
+@import url('./cover/cover.css');
 @import url('./footer/footer.css');
-
-.body {
-  background-color: var(--page-background-color);
-}
-
-.page {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: var(--text-color-primary);
-}
-
 
 

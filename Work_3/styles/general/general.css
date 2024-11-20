@@ -1,0 +1,23 @@
+.body {
+  background-color: var(--page-background-color);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.page {
+  font-family: 'Inter', Arial, sans-serif;
+  color: var(--text-color-primary);
+}
+
+.link {
+  color: var(--text-color-primary);
+  transition: opacity 0.25s linear;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+.link:active {
+  opacity: 0.6;
+}
