@@ -62,7 +62,7 @@
   line-height: 1.63;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
   .places {
     padding: 0 3rem;
   }
@@ -73,7 +73,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .places {
     gap: 4.55rem;
     padding: 0 1.5rem;
