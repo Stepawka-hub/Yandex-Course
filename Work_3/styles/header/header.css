@@ -12,10 +12,12 @@
 .header__links {
   display: flex;
   gap: 1.125rem;
+  padding: 0.5rem 0 0;
 }
 
 .header__link {
   font-size: 1.5rem;
+  font-weight: 300;
   text-decoration: none;
 }
 
@@ -42,5 +44,9 @@
 
   .header {
     padding: 0 1rem;
+  }
+
+  .header__link {
+    font-size: 1.125rem;
   }
 }

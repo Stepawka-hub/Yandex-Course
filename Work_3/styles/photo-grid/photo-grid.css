@@ -5,7 +5,8 @@
   gap: 1rem;
 
   padding: 0 3rem;
-  margin: 0 0 5.75rem;
+  margin: 0 auto 5.75rem;
+  max-width: 80rem;
 }
 
 .photo-grid__item {
@@ -14,7 +15,7 @@
 }
 
 .photo-grid__item img {
-  max-width: 22rem;
+  max-width: 24rem;
   width: 100%;
   height: auto;
   object-fit: contain;
@@ -29,6 +30,7 @@
 
 @media (max-width: 768px) {
   .photo-grid {
+    gap: 0.75rem;
     padding: 0 1rem;
     margin: 0 0 4rem;
   }
