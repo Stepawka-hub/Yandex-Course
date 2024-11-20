@@ -18,12 +18,14 @@
 }
 
 .lead__image {
-  max-width: 61.5rem;
+  max-width: 67.5rem;
+  padding: 0 3rem;
   margin: 0 auto;
 }
 
 .lead__image img {
   width: 100%;
+  object-fit: contain;
 }
 
 .lead__image-caption {
@@ -34,4 +36,20 @@
   letter-spacing: 1.5px;
   text-align: left;
   text-transform: uppercase;
+}
+
+@media (max-width: 1280px) {
+  .lead__image {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .lead__image {
+    padding: 0;
+  }
+
+  .lead__image-caption {
+    padding: 0 1.5rem;
+  }
 }

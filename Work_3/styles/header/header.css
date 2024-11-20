@@ -5,7 +5,7 @@
 .header__nav {
   display: flex;
   justify-content: space-between;
-  margin: 2rem 0 3.5rem;
+  padding: 1.75rem 0 3.5rem;
 }
 
 .header__links {
@@ -20,4 +20,16 @@
 
 .link_active {
   text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  .header__nav {
+    padding: 1.75rem 0 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 1.5rem;
+  }
 }

@@ -17,7 +17,7 @@
 }
 
 .place__title {
-  max-width: 28.75rem;
+  max-width: 50%;
   flex: 50%;
 
   font-size: 4.5rem;
@@ -46,10 +46,51 @@
   margin: 3rem 0 0;
 }
 
+.place__image {
+  min-width: 50%;
+}
+
+.place__image img {
+  width: 100%;
+}
+
 .place__text {
   max-width: 30.25rem;
   margin: 0 0 1.625rem;
   font-size: 1.125rem;
   font-weight: 300;
   line-height: 1.63;
+}
+
+@media (max-width: 1024px) {
+  .places {
+    padding: 0 3rem;
+  }
+
+  .place__header,
+  .place__content {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .places {
+    gap: 4.55rem;
+    padding: 0 1.5rem;
+  }
+
+  .place__header,
+  .place__content {
+    gap: 1.75rem;
+  }
+
+  .place__title {
+    font-size: 2.625rem;
+    line-height: 3rem;
+  }
+
+  .place__text {
+    margin: 0 0 1.55rem;
+    font-size: 1rem;
+  }
 }

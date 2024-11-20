@@ -31,7 +31,6 @@
 .cover__image {
   position: absolute;
   opacity: 0.7;
-
   z-index: -1;
 }
 
