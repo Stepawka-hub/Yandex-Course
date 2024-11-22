@@ -8,9 +8,13 @@
 
 // @todo: Вывести карточки на страницу
 
+document.addEventListener("DOMContentLoaded", function() {
+  const popups = document.querySelectorAll('.popup');
+  popups.forEach((popup) => popup.classList.add('popup_is-animated'));
+});
+
 const profilePopup = document.querySelector('.popup_type_edit');
 const cardPopup = document.querySelector('.popup_type_new-card');
-const imagePopup = document.querySelector('.popup_type_image');
 
 function openModal(popup) {
   popup.classList.add('popup_is-opened');
@@ -28,17 +32,18 @@ function addCloseButtonListener(popup) {
 // Добавление слушателя для закрытия модального окна
 addCloseButtonListener(profilePopup);
 addCloseButtonListener(cardPopup);
+addCloseButtonListener(imagePopup);
 
 
 
+// Редактирование профиля
 const profileFormElement = profilePopup.querySelector('.popup__form');
+const profileTitle = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
 const nameInput = profileFormElement.querySelector('.popup__input_type_name');
 const jobInput = profileFormElement.querySelector('.popup__input_type_description');
 
 function fillProfileForm() {
-  const profileTitle = document.querySelector('.profile__title');
-  const profileDescription = document.querySelector('.profile__description');
-
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
 
@@ -47,9 +52,6 @@ function fillProfileForm() {
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-
-  const profileTitle = document.querySelector('.profile__title');
-  const profileDescription = document.querySelector('.profile__description');
 
   const nameValue = nameInput.value;
   const jobValue = jobInput.value;
@@ -69,6 +71,7 @@ profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 
 
 
+// Добавление карточек
 const cardFormElement = cardPopup.querySelector('.popup__form');
 const cardNameInput = cardFormElement.querySelector('.popup__input_type_card-name');
 const cardLinkInput = cardFormElement.querySelector('.popup__input_type_url');

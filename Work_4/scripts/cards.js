@@ -1,6 +1,10 @@
 const placesList = document.querySelector('.places__list');
 const cardTemplate = document.querySelector('#card-template');
 
+const imagePopup = document.querySelector('.popup_type_image');
+const image = imagePopup.querySelector('.popup__image');
+const caption = imagePopup.querySelector('.popup__caption');
+
 const initialCards = [
     {
       name: "Архыз",
@@ -28,6 +32,22 @@ const initialCards = [
     }
 ];
 
+function deleteCard(button) {
+  button.closest('.card').remove();
+}
+
+function toggleLike(button) {
+  button.classList.toggle('card__like-button_is-active')
+}
+
+function handleCardImageClick(title, link) {
+  image.src = link;
+  image.alt = title;
+  caption.textContent = title;
+
+  openModal(imagePopup);
+}
+
 function createCard(name, link) {
   const cardElement = cardTemplate.content.cloneNode(true);
 
@@ -37,6 +57,13 @@ function createCard(name, link) {
   const cardImage = cardElement.querySelector('.card__image');
   cardImage.src = link;
   cardImage.alt = name;
+  cardImage.addEventListener('click', () => handleCardImageClick(name, link));
+
+  const likeButton = cardElement.querySelector('.card__like-button');
+  likeButton.addEventListener('click', (evt) => toggleLike(evt.target));
+
+  const deleteButton = cardElement.querySelector('.card__delete-button');
+  deleteButton.addEventListener('click', (evt) => deleteCard(evt.target));
 
   return cardElement;
 }
