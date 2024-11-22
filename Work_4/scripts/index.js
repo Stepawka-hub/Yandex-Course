@@ -11,6 +11,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   const popups = document.querySelectorAll('.popup');
   popups.forEach((popup) => popup.classList.add('popup_is-animated'));
+  renderCards();
 });
 
 const profilePopup = document.querySelector('.popup_type_edit');

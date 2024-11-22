@@ -74,5 +74,3 @@ function renderCards() {
     placesList.appendChild(card);
   });
 }
-
-renderCards();
