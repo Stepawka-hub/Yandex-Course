@@ -23,6 +23,16 @@ function checkInputValidity(formElement, formInput, settings) {
   }
 };
 
+function validateFormFields(formElement, settings) {
+  const formInputs = Array.from(formElement.querySelectorAll(settings.inputSelector));
+  const buttonElement = formElement.querySelector(settings.submitButtonSelector);
+
+  formInputs.forEach((input) => {
+    checkInputValidity(formElement, input, settings);
+  });
+  toggleButtonState(formInputs, buttonElement, settings);
+}
+
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -52,9 +62,11 @@ function setEventListeners(formElement, settings) {
   });
 }
 
-export default function enableValidation(settings) {
+function enableValidation(settings) {
   const formList = document.querySelectorAll(settings.formSelector);
   formList.forEach((form) => {
     setEventListeners(form, settings);
   });
 }
+
+export { enableValidation, validateFormFields }

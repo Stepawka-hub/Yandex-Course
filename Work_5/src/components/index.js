@@ -1,8 +1,8 @@
 import '../pages/index.css';
 
-import enableValidation from './validate.js';
+import { enableValidation, validateFormFields } from './validate.js';
 import { createCard } from './card.js';
-import { openModal, closeModal, closeByEsc } from './modal.js';
+import { openModal, closeModal } from './modal.js';
 
 
 
@@ -117,6 +117,8 @@ function fillProfileForm() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
 
+  validateFormFields(profileFormElement, validationSettings);
+
   openModal(profilePopup);
 }
 
@@ -148,6 +150,8 @@ const addButton = document.querySelector('.profile__add-button');
 function clearNewCardForm() {
   cardNameInput.value = '';
   cardLinkInput.value = '';
+
+  validateFormFields(cardFormElement, validationSettings);
 
   openModal(cardPopup);
 }
