@@ -1,39 +1,42 @@
-// @todo: Темплейт карточки
-
-// @todo: DOM узлы
-
-// @todo: Функция создания карточки
-
-// @todo: Функция удаления карточки
-
-// @todo: Вывести карточки на страницу
+import '../pages/index.css';
 
 const popups = document.querySelectorAll('.popup');
-popups.forEach((popup) => popup.classList.add('popup_is-animated'));
+popups.forEach((popup) => {
+  popup.classList.add('popup_is-animated');
+  addCloseButtonListener(popup);
+
+  popup.addEventListener('click', (evt) => {
+    if (evt.target === popup) {
+      closeModal(popup);
+    }
+  });
+});
 renderCards();
 
 const profilePopup = document.querySelector('.popup_type_edit');
 const cardPopup = document.querySelector('.popup_type_new-card');
 
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector('.popup_is-opened');       
+    closeModal(openedPopup);      
+  } 
+}
+
 function openModal(popup) {
   popup.classList.add('popup_is-opened');
+  document.addEventListener('keydown', closeByEsc);
 }
 
 function closeModal(popup) {
   popup.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', closeByEsc);
 }
 
 function addCloseButtonListener(popup) {
   const closeButton = popup.querySelector('.popup__close');
   closeButton.addEventListener('click', () => closeModal(popup));
 }
-
-// Добавление слушателя для закрытия модального окна
-addCloseButtonListener(profilePopup);
-addCloseButtonListener(cardPopup);
-addCloseButtonListener(imagePopup);
-
-
 
 // Редактирование профиля
 const profileFormElement = profilePopup.querySelector('.popup__form');
@@ -100,4 +103,63 @@ addButton.addEventListener('click', clearNewCardForm);
 
 // Обработка формы
 cardFormElement.addEventListener('submit', handleCardFormSubmit);
+
+
+
+// Валидация формы
+function showError(popupElement, popupInput, errorMessage) {
+  const popupError = popupElement.querySelector(`.${popupInput.id}-error`);
+
+  popupInput.classList.add('popup__input_type_error');
+  popupError.textContent = errorMessage;
+  popupError.classList.add('popup__input-error_active');
+};
+
+function hideError(popupElement, popupInput) {
+  const popupError = popupElement.querySelector(`.${popupInput.id}-error`);
+
+  popupInput.classList.remove('popup__input_type_error');
+  popupError.classList.remove('popup__input-error_active');
+  popupError.textContent = '';
+};
+
+function checkInputValidity(popupElement, popupInput) {
+  if (!popupInput.validity.valid) {
+    showError(popupElement, popupInput, popupInput.validationMessage);
+  } else {
+    hideError(popupElement, popupInput);
+  }
+};
+
+function hasInvalidInput(inputList) {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+
+function toggleButtonState(popupInputs, buttonElement) {
+  if (hasInvalidInput(popupInputs)) {
+    buttonElement.classList.add('popup__button_disabled');
+  } else {
+    buttonElement.classList.remove('popup__button_disabled');
+  }
+}
+
+function setEventListeners(popupElement) {
+  const popupInputs = Array.from(popupElement.querySelectorAll('.popup__input'));
+
+  const buttonElement = popupElement.querySelector('.popup__button');
+  toggleButtonState(popupInputs, buttonElement);
+
+  popupInputs.forEach((popupInput) => {
+    popupInput.addEventListener('input', (evt) => {
+      const input = evt.target;
+      checkInputValidity(popupElement, input);
+      toggleButtonState(popupInputs, buttonElement);
+    });
+  });
+}
+
+setEventListeners(profilePopup);
+setEventListeners(cardPopup);
 
