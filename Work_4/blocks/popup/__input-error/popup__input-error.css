@@ -1,0 +1,10 @@
+.popup__input-error {
+  display: none;
+  font-size: 12px;
+  font-weight: 400;
+  color: #FF0000;
+}
+
+.popup__input-error_active {
+  display: block;
+}
