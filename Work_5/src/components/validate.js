@@ -23,12 +23,12 @@ function checkInputValidity(formElement, formInput, settings) {
   }
 };
 
-function validateFormFields(formElement, settings) {
+function resetFormFields(formElement, settings) {
   const formInputs = Array.from(formElement.querySelectorAll(settings.inputSelector));
   const buttonElement = formElement.querySelector(settings.submitButtonSelector);
 
   formInputs.forEach((input) => {
-    checkInputValidity(formElement, input, settings);
+    hideError(formElement, input, settings);
   });
   toggleButtonState(formInputs, buttonElement, settings);
 }
@@ -71,4 +71,4 @@ function enableValidation(settings) {
   });
 }
 
-export { enableValidation, validateFormFields }
+export { enableValidation, resetFormFields }

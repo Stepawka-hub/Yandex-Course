@@ -5,6 +5,11 @@ function closeByEsc(evt) {
   } 
 }
 
+function setTextPopupButton(popup, text) {
+  const button = popup.querySelector('.popup__button');
+  button.textContent = text;
+}
+
 function openModal(popup) {
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', closeByEsc);
@@ -15,4 +20,4 @@ function closeModal(popup) {
   document.removeEventListener('keydown', closeByEsc);
 }
 
-export { openModal, closeModal, closeByEsc }
+export { openModal, closeModal, setTextPopupButton }

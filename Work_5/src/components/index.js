@@ -1,6 +1,6 @@
 import '../pages/index.css';
 
-import { enableValidation, validateFormFields } from './validate.js';
+import { enableValidation, resetFormFields } from './reset.js';
 import { createCard } from './card.js';
 import { openModal, closeModal } from './modal.js';
 
@@ -117,7 +117,7 @@ function fillProfileForm() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
 
-  validateFormFields(profileFormElement, validationSettings);
+  resetFormFields(profileFormElement, validationSettings);
 
   openModal(profilePopup);
 }
@@ -151,7 +151,7 @@ function clearNewCardForm() {
   cardNameInput.value = '';
   cardLinkInput.value = '';
 
-  validateFormFields(cardFormElement, validationSettings);
+  resetFormFields(cardFormElement, validationSettings);
 
   openModal(cardPopup);
 }
