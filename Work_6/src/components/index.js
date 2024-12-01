@@ -3,7 +3,7 @@ import '../pages/index.css';
 import { enableValidation, validateFormFields } from './validate.js';
 import { createCard } from './card.js';
 import { openModal, closeModal } from './modal.js';
-
+import { getInitialCards, getProfile, updateProfile, addNewCard } from './api.js';
 
 
 // Добавляем обработчики и стили для popup`ов
@@ -62,36 +62,10 @@ function handleCardImageClick(title, link) {
 // Отрисовываем карточки
 // Отрисовываем карточки
 const placesList = document.querySelector('.places__list');
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  }
-];
 
 function renderCards(cards) {
   cards.forEach((element) => {
-    const card = createCard(element.name, element.link);
+    const card = createCard(element.name, element.link, element.likes);
 
     const cardImage = card.querySelector('.card__image');
     cardImage.addEventListener('click', () => handleCardImageClick(element.name, element.link));
@@ -100,18 +74,27 @@ function renderCards(cards) {
   });
 }
 
-renderCards(initialCards);
+getInitialCards()
+  .then((response) => {
+    renderCards(response);
+  })
+  .catch((error) => {
+    console.error(error);
+    alert("Произошла ошибка при отрисовке карточек");
+  });
 
 
 // Настраиваем попап (и подтверждение формы) для редактирования профиля
 // Настраиваем попап (и подтверждение формы) для редактирования профиля
-const profilePopup = document.querySelector('.popup_type_edit');
-const profileFormElement = profilePopup.querySelector('.popup__form');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
+const profileImage = document.querySelector('.profile__image')
+const editButton = document.querySelector('.profile__edit-button');
+
+const profilePopup = document.querySelector('.popup_type_edit');
+const profileFormElement = profilePopup.querySelector('.popup__form');
 const nameInput = profileFormElement.querySelector('.popup__input_type_name');
 const jobInput = profileFormElement.querySelector('.popup__input_type_description');
-const editButton = document.querySelector('.profile__edit-button');
 
 function fillProfileForm() {
   nameInput.value = profileTitle.textContent;
@@ -122,17 +105,39 @@ function fillProfileForm() {
   openModal(profilePopup);
 }
 
+function setProfileData(name, about, avatar) {
+  profileTitle.textContent = name;
+  profileDescription.textContent = about;
+  profileImage.style.backgroundImage = `url(${avatar})`;
+}
+
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
   const nameValue = nameInput.value;
   const jobValue = jobInput.value;
 
-  profileTitle.textContent = nameValue;
-  profileDescription.textContent = jobValue;
-
-  closeModal(profilePopup);
+  updateProfile(nameValue, jobValue)
+    .then((response) => {
+      setProfileData(response.name, response.about, response.avatar);
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("Произошла ошибка при обновлении профиля");
+    })
+    .finally(() => {
+      closeModal(profilePopup);
+    })
 }
+
+getProfile()
+  .then((response) => {
+    setProfileData(response.name, response.about, response.avatar);
+  })
+  .catch((error) => {
+    console.error(error);
+    alert("Произошла ошибка при получении профиля");
+  })
 
 editButton.addEventListener('click', fillProfileForm);
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
@@ -162,16 +167,21 @@ function handleCardFormSubmit(evt) {
   const cardNameValue = cardNameInput.value;
   const cardLinkValue = cardLinkInput.value;
 
-  const card = createCard(cardNameValue, cardLinkValue);
-  
-  const cardImage = card.querySelector('.card__image');
-  cardImage.addEventListener('click', () => handleCardImageClick(cardNameValue, cardLinkValue));
-
-  placesList.insertBefore(card, placesList.firstChild);
-
-  closeModal(cardPopup);
+  addNewCard(cardNameValue, cardLinkValue)
+    .then((response) => {
+      const card = createCard(response.name, response.link);
+      const cardImage = card.querySelector('.card__image');
+      cardImage.addEventListener('click', () => handleCardImageClick(response.name, response.link));
+      placesList.insertBefore(card, placesList.firstChild);
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("Произошла ошибка при добавлении карточки");
+    })
+    .finally(() => {
+      closeModal(cardPopup);
+    })
 }
 
 addButton.addEventListener('click', clearNewCardForm);
 cardFormElement.addEventListener('submit', handleCardFormSubmit);
-
