@@ -247,13 +247,13 @@ function handleCardFormSubmit(evt) {
       const cardHTML = createCard(response);
       setCardEventListener(response, cardHTML);
       placesList.insertBefore(cardHTML, placesList.firstChild);
+      closeModal(cardPopup);
     })
     .catch((error) => {
       console.error(error);
       alert("Произошла ошибка при добавлении карточки");
     })
     .finally(() => {
-      closeModal(cardPopup);
       setTextPopupButton(cardPopup, 'Сохранить');
     })
 }
