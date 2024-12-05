@@ -6,17 +6,20 @@ const config = {
   }
 }
 
+const handleResponse = (response, errorMessage) => {
+  if (!response.ok) {
+    return Promise.reject(`${errorMessage}: ${response.status}`);
+  }
+
+  return response.json();
+}
+
 const getProfile = () => {
   return fetch(`${config.baseURL}/users/me`, {
     headers: config.headers
   })
-    .then((response) => {
-      if (!response.ok) {
-        return Promise.reject(`Ошибка при получении данных профиля: ${response.status}`);
-      }
-
-      return response.json();
-    })
+    .then((response) => 
+      handleResponse(response, "Ошибка при получении данных профиля"));
 }
 
 const updateProfile = (name, about) => {
@@ -28,13 +31,8 @@ const updateProfile = (name, about) => {
       about
     })
   })
-    .then(response => {
-      if (!response.ok) {
-        return Promise.reject(`Ошибка при обновлении профиля: ${response.status}`);
-      }
-
-      return response.json();
-    })
+    .then((response) => 
+      handleResponse(response, "Ошибка при обновлении профиля"));
 }
 
 const updateAvatar = (avatar) => {
@@ -45,26 +43,16 @@ const updateAvatar = (avatar) => {
       avatar
     })
   })
-    .then(response => {
-      if (!response.ok) {
-        return Promise.reject(`Ошибка при обновлении аватара: ${response.status}`);
-      }
-
-      return response.json();
-    })
+    .then((response) => 
+      handleResponse(response, "Ошибка при обновлении аватара"));
 }
 
 const getInitialCards = () => {
   return fetch(`${config.baseURL}/cards`, {
     headers: config.headers
   })
-    .then(response => {
-      if (!response.ok) {
-        return Promise.reject(`Ошибк при получении карточек: ${response.status}`);
-      }
-
-      return response.json();
-    });
+  .then((response) => 
+    handleResponse(response, "Ошибка при получении карточек"));
 }
 
 const addNewCard = (name, link) => {
@@ -76,13 +64,8 @@ const addNewCard = (name, link) => {
       link
     })
   })
-    .then((response) => {
-      if (!response.ok) {
-        return Promise.reject(`Ошибка при создании карточки: ${response.status}`);
-      }
-
-      return response.json();
-    })
+    .then((response) => 
+      handleResponse(response, "Ошибка при создании карточки"));
 }
 
 const deleteCard = (_id) => {
@@ -90,13 +73,8 @@ const deleteCard = (_id) => {
     method: 'DELETE',
     headers: config.headers
   })
-    .then((response) => {
-      if (!response.ok) {
-        return Promise.reject(`Ошибка при удалении карточки: ${response.status}`);
-      }
-
-      return response.json();
-    })
+    .then((response) => 
+      handleResponse(response, "Ошибка при удалении карточки"));
 }
 
 const putLikeOnCard = (_id) => {
@@ -104,13 +82,8 @@ const putLikeOnCard = (_id) => {
     method: 'PUT',
     headers: config.headers
   })
-    .then((response) => {
-      if (!response.ok) {
-        return Promise.reject(`Ошибка при постановке лайка: ${response.status}`);
-      }
-
-      return response.json();
-    })
+  .then((response) => 
+    handleResponse(response, "Ошибка при постановке лайка"));
 }
 
 const removeLikeFromCard = (_id) => {
@@ -118,13 +91,8 @@ const removeLikeFromCard = (_id) => {
     method: 'DELETE',
     headers: config.headers
   })
-    .then((response) => {
-      if (!response.ok) {
-        return Promise.reject(`Ошибка при удалении лайка: ${response.status}`);
-      }
-
-      return response.json();
-    })
+  .then((response) => 
+    handleResponse(response, "Ошибка при удалении лайка"));
 }
 
 export 

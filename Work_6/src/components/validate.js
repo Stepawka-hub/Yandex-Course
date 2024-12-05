@@ -16,6 +16,12 @@ function hideError(formElement, formInput, settings) {
 };
 
 function checkInputValidity(formElement, formInput, settings) {
+  if (formInput.validity.patternMismatch) {
+    const errorMessage = formInput.dataset.errorMessage;
+    showError(formElement, formInput, errorMessage, settings);
+    return;
+  }
+
   if (!formInput.validity.valid) {
     showError(formElement, formInput, formInput.validationMessage, settings);
   } else {
