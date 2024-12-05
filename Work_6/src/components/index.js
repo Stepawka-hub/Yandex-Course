@@ -1,7 +1,7 @@
 import '../pages/index.css';
 
 import { enableValidation, resetFormFields } from './validate.js';
-import { createCard, toggleLike, hideDeleteButton, changeCountLikes } from './card.js';
+import { createCard, handleDeleteCard, handleLikeCard } from './card.js';
 import { openModal, closeModal, setTextPopupButton } from './modal.js';
 import { 
   getProfile, 
@@ -9,9 +9,6 @@ import {
   updateAvatar,
   getInitialCards, 
   addNewCard, 
-  deleteCard, 
-  putLikeOnCard, 
-  removeLikeFromCard 
 } from './api.js';
 
 let currentUserId;
@@ -66,66 +63,15 @@ function handleCardImageClick(title, link) {
   openModal(imagePopup);
 }
 
-function setDeleteButtonListener(deleteButton) {
-  deleteButton.addEventListener('click', (evt) => {
-    const card = evt.target.closest('.card');
-
-    deleteCard(card.getAttribute('id')).
-      then(() => {
-        card.remove();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  });
-}
-
-function hasLike(card) {
-  return card.likes.some((like) => like._id === currentUserId)
-}
-
-function setLikeButtonListener(likeButton) {
-  likeButton.addEventListener('click', (evt) => {
-    const cardHTML = evt.target.closest('.card');
-    const cardId = cardHTML.getAttribute('id');
-
-    const isLiked = evt.target.classList.contains('card__like-button_is-active');
-    const promise = isLiked ? removeLikeFromCard(cardId) : putLikeOnCard(cardId);
-
-    promise
-      .then((response) => {
-        console.log(response);
-        toggleLike(evt.target);
-        changeCountLikes(cardHTML, response.likes.length);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  });
-}
-
-function setCardEventListener(card, cardHTML) {
-  const cardImage = cardHTML.querySelector('.card__image');
-  cardImage.addEventListener('click', () => handleCardImageClick(card.name, card.link));
-
-  const likeButton = cardHTML.querySelector('.card__like-button');
-  if (hasLike(card)) {
-    toggleLike(likeButton);
-  }
-  setLikeButtonListener(likeButton);
-
-  const deleteButton = cardHTML.querySelector('.card__delete-button');
-  if (card.owner._id === currentUserId) {
-    setDeleteButtonListener(deleteButton);
-  } else {
-    hideDeleteButton(deleteButton);
-  }
-}
-
 function renderCards(cards) {
   cards.forEach((card) => {
-    const cardHTML = createCard(card);
-    setCardEventListener(card, cardHTML);
+    const cardHTML = createCard(
+      currentUserId,
+      card, 
+      handleDeleteCard, 
+      handleLikeCard, 
+      handleCardImageClick
+    );
     placesList.appendChild(cardHTML);
   });
 }
@@ -244,8 +190,13 @@ function handleCardFormSubmit(evt) {
 
   addNewCard(cardNameValue, cardLinkValue)
     .then((response) => {
-      const cardHTML = createCard(response);
-      setCardEventListener(response, cardHTML);
+      const cardHTML = createCard(
+        currentUserId,
+        response, 
+        handleDeleteCard, 
+        handleLikeCard, 
+        handleCardImageClick
+      );
       placesList.insertBefore(cardHTML, placesList.firstChild);
       closeModal(cardPopup);
     })
