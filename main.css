@@ -102,10 +102,6 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/card/__like-button/_is-active/card__like-button_is-active.css ***!
   \**************************************************************************************************************************************************************************************************/
 .card__like-button_is-active{background:transparent url(a7ffe37dcb927ba0c46c.svg) no-repeat}
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/card/__delete-button/_is-invisible/card__delete-button_is-invisible.css ***!
-  \************************************************************************************************************************************************************************************************************/
-.card__delete-button_is-invisible{display:none}
 /*!*********************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js!./src/blocks/card/__delete-button/card__delete-button.css ***!
   \*********************************************************************************************************************************************************************************/
